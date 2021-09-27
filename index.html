@@ -12,6 +12,7 @@
 
     <!-- CSS files -->
     <link rel="stylesheet" href="assets/css/reset.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/styles.css" />
 
     <!-- JS files -->
@@ -20,19 +21,42 @@
 
   <body>
     <!-- header -->
-    <header>
-      <h1>Weather Dashboard</h1>      
+    <header class="p-3 bg-dark text-white mb-2">
+      <h1 class="text-center">Weather Dashboard</h1>      
     </header>
 
-    <!-- side search engine -->
-    <aside>
+    <main class="d-flex p-2">
 
-    </aside>
-
-    <!-- today's weather -->
-    <div>
-
-    </div>
+      <!-- side search engine -->
+      <div class="d-flex flex-column bg-white h-100 px-2" style="width: 280px;">
+        
+        <h2 class="font-weight-bold">Search for a City:</h2>
+        <input id="inserthere" type="text" class="form-control mb-2" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        <button id="submitbtn" type="button" class="btn btn-primary btn-lg btn-block">Search</button>
+        
+        <hr>
+        <!-- this will be the cities save on localStorage -->
+        <ul class="nav nav-pills flex-column mb-auto">
+          
+          <button type="button" class="btn btn-secondary btn-lg btn-block">City</button>
+          
+        </ul>
+      </div>
+      <!-- today's weather -->
+      <div class="border w-100 p-2">
+        <h2>
+          <!-- City selected -->
+          <span id="city"></span>
+          <!-- Date -->
+          <span id="todaysDate"></span>  
+        </h2>
+        <h3>Temp: <span id="currentTemperature"></span> </h3>
+        <h3>Wind: <span id="currentWind"></span> </h3>
+        <h3>Humidity: <span id="currentHumidity"></span> </h3>
+        <h3>UV Index: <span id="currentUVIndex"></span> </h3>
+      </div>
+      
+    </main>
 
     <!-- 5-day forecast -->
     <div>
