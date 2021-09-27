@@ -11,6 +11,7 @@ var todayTemp = document.getElementById("currentTemperature");
 var todayWind = document.getElementById("currentWind");
 var todayHumidity = document.getElementById("currentHumidity");
 var todayUVIndex = document.getElementById("currentUVIndex");
+var errorMessage = document.querySelector("#errorMessage");
 
 var cityTBS = document.getElementById("inserthere");
 
@@ -24,9 +25,15 @@ function goLoco(event) {
     forecastData = fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityTBS.value}&appid=${apiKey}&units=metric`)
     .then(response => response.json())
     .then((data)=>{
+        errorMessage.style.display = "none";
         console.log(data);
         weatherData(data);
+        FutureForecast(data);
     })
+    .catch((error) => {
+        errorMessage.textContent = "City Not Found";
+        errorMessage.style.display = "inline";
+      });
 
 };
 function weatherData(data) {
@@ -41,6 +48,9 @@ function weatherData(data) {
         todayHumidity.textContent= weatherLoco.current.humidity + " %"
         todayUVIndex.textContent= weatherLoco.current.uvi
     })
+}
+function FutureForecast(data){
+    console.log(data);
 }
 
 
