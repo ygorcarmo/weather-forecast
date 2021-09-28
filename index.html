@@ -46,7 +46,7 @@
         </ul>
       </div>
       <!-- today's weather -->
-      <div class="border w-100 p-2">
+      <div id="currentBox" class="border w-100 p-2" style="display: none;">
         <h2>
           <!-- City selected -->
           <span id="city"></span>
@@ -57,15 +57,45 @@
         <h3>Wind: <span id="currentWind"></span> </h3>
         <h3>Humidity: <span id="currentHumidity"></span> </h3>
         <h3>UV Index: <span id="currentUVIndex"></span> </h3>
+        <!-- 5-day forecast -->
+        <div id="fiveDayBox">
+          <h2>5 Day Forcast</h2>
+          <div class="d-flex">
+            <section id="forecast"></section>
+            <section>
+              <h3 id="date1"></h3>
+              <h4>Temp: <span class="fiveDayTemp"></span></h4>
+              <h4>Wind: <span class="fiveDayWind"></span></h4>
+              <h4>Humidity: <span class="fiveDayHumid"></span></h4>
+            </section>
+            <section>
+              <h3 id="date2"></h3>
+              <h4>Temp: <span class="fiveDayTemp"></span></h4>
+              <h4>Wind: <span class="fiveDayWind"></span></h4>
+              <h4>Humidity: <span class="fiveDayHumid"></span></h4>
+            </section>
+            <section>
+              <h3 id="date3"></h3>
+              <h4>Temp: <span class="fiveDayTemp"></span></h4>
+              <h4>Wind: <span class="fiveDayWind"></span></h4>
+              <h4>Humidity: <span class="fiveDayHumid"></span></h4>
+            </section>
+            <section>
+              <h3 id="date4"></h3>
+              <h4>Temp: <span class="fiveDayTemp"></span></h4>
+              <h4>Wind: <span class="fiveDayWind"></span></h4>
+              <h4>Humidity: <span class="fiveDayHumid"></span></h4>
+            </section>
+            <section>
+              <h3 id="date5"></h3>
+              <h4>Temp: <span class="fiveDayTemp"></span></h4>
+              <h4>Wind: <span class="fiveDayWind"></span></h4>
+              <h4>Humidity: <span class="fiveDayHumid"></span></h4>
+            </section>
+          </div>
+        </div>      
       </div>
-      
-    </main>
-
-    <!-- 5-day forecast -->
-    <div>
-
-    </div>
-
+      </main>
     <!-- footer -->
   </body>
 </html>
