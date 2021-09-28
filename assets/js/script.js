@@ -95,9 +95,9 @@ function setLocal(){
     }
 
     citiesLocal.push(cityLocal);
+    // window.location.reload();
 
     localStorage.setItem("cities", JSON.stringify(citiesLocal));
 }
-
 
 

@@ -44,11 +44,13 @@ var apiKey = "e9338296fd417a53918f0986d22214b3";
 function goSec(event) {
     // event.preventDefault();
     console.log(secBtn.textContent);
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${secBtn.textContent}&appid=${apiKey}&units=metric`)
+    console.log(event.target.innerText)
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${event.target.innerText}&appid=${apiKey}&units=metric`)
     .then(response => response.json())
     .then((data)=>{  
         errorMessage.textContent = "";      
         errorMessage.style.display = "none";
+        cityDisplayed = event.target.innerText;
         console.log(data);
         weatherData(data);
         
@@ -67,7 +69,6 @@ function weatherData(data) {
     .then((weatherLoco) =>{    
 
         mainGrid.style.display = "inline";
-        cityDisplayed = cityTBS.value
         selectedCity.textContent = cityDisplayed.toUpperCase();
         todayTemp.textContent= weatherLoco.current.temp + " °C"
         todayWind.textContent= weatherLoco.current.wind_speed + " KM/H" 
