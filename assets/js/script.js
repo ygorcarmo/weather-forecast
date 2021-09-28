@@ -1,7 +1,7 @@
 // buttons Start
 var searchBtn = document.getElementById("submitbtn");
 
-searchBtn.addEventListener('click', goLoco);
+searchBtn.addEventListener('click', startLoco);
 // buttons End
 
 // Text/Elements Start
@@ -21,14 +21,31 @@ var windCard = document.querySelectorAll(".fiveDayWind");
 var humidCard = document.querySelectorAll(".fiveDayHumid");
 // Text/Elements End
 
+// submit button
+
+function startLoco(){
+    if(cityTBS.value === ""){
+        alert("Please Select a City");
+    }else{
+        goLoco();
+    }
+    // && !cityTBS.value === ""
+    setTimeout(() => {
+        
+        if(errorMessage.textContent === "" ){
+            setLocal();
+        }
+    }, 1000);
+}
 // API stuff
 
 var apiKey = "e9338296fd417a53918f0986d22214b3";
 function goLoco(event) {
-    event.preventDefault();
+    // event.preventDefault();
     fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityTBS.value}&appid=${apiKey}&units=metric`)
     .then(response => response.json())
-    .then((data)=>{        
+    .then((data)=>{  
+        errorMessage.textContent = "";      
         errorMessage.style.display = "none";
         console.log(data);
         weatherData(data);
@@ -41,6 +58,7 @@ function goLoco(event) {
       });
 
 };
+
 function weatherData(data) {
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${data.city.coord.lat}&lon=${data.city.coord.lon}&appid=${apiKey}&units=metric`)
     .then(response => response.json())
@@ -58,11 +76,27 @@ function weatherData(data) {
         for (var i = 0; i < 5; i++) {
             tempCard[i].textContent =   weatherLoco.daily[i].temp.eve + " °C";
             windCard[i].textContent =   weatherLoco.daily[i].wind_speed +" KM/H" ;
-            humidCard[i].textContent =  weatherLoco.daily[i].humidity + " %";
-            
-            console.log(weatherLoco.daily[i].temp.eve);
+            humidCard[i].textContent =  weatherLoco.daily[i].humidity + " %";            
           }
     })
+};
+
+function setLocal(){
+    var cityLocal = {
+        city: cityTBS.value.trim()
+    };
+
+    var citiesLocal = localStorage.getItem("cities");
+
+    if(!citiesLocal || citiesLocal === null){
+        citiesLocal = [];
+    }else{
+        citiesLocal = JSON.parse(citiesLocal)
+    }
+
+    citiesLocal.push(cityLocal);
+
+    localStorage.setItem("cities", JSON.stringify(citiesLocal));
 }
 
 
