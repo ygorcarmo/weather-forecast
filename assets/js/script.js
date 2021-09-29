@@ -34,7 +34,7 @@ function startLoco(){
         return
     }else{
         goLoco();
-        setLocal();
+        // setLocal();
     }      
 }
 // API stuff
@@ -47,24 +47,27 @@ function goLoco(event) {
     .then((data)=>{  
         errorMessage.textContent = "";      
         errorMessage.style.display = "none";
-        weatherData(data);        
+        weatherData(data);  
+             
         return
     })
     .catch((error) => {
         errorMessage.textContent = "City Not Found";
         errorMessage.style.display = "inline";
 
-        var citiesLocal = localStorage.getItem("cities");
+        // var citiesLocal = localStorage.getItem("cities");
 
-        if(!citiesLocal || citiesLocal === null){
-            citiesLocal = [];
-        }else{
-            citiesLocal = JSON.parse(citiesLocal)
-            citiesLocal.pop();
-            console.log(citiesLocal);
-            localStorage.setItem("cities", JSON.stringify(citiesLocal));
-            initTwo();
-        }
+        // if(!citiesLocal || citiesLocal === null){
+        //     citiesLocal = [];
+        // }else{
+        //     citiesLocal = JSON.parse(citiesLocal)
+        //     citiesLocal.pop();
+        //     console.log(citiesLocal);
+        //     localStorage.setItem("cities", JSON.stringify(citiesLocal));
+        //     resetState();
+        //     console.log(initTwo)
+        //     initTwo();
+        // }
         
       });
 
@@ -76,6 +79,7 @@ function weatherData(data) {
     .then((weatherLoco) =>{    
 
         mainGrid.style.display = "inline";
+        setLocal(); 
         cityDisplayed = cityTBS.value
         selectedCity.textContent = cityDisplayed.toUpperCase();
         todayTemp.textContent= weatherLoco.current.temp + " °C"
@@ -120,6 +124,7 @@ function setLocal(){
 }
 
 function resetState(){
+    var addHere = document.getElementById("newTetas");
     while (addHere.firstChild){
         addHere.removeChild
         (addHere.firstChild)
