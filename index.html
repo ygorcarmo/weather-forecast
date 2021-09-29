@@ -47,48 +47,58 @@
         </ul>
       </div>
       <!-- today's weather -->
-      <div id="currentBox" class="border w-100 p-2" style="display: none;">
-        <h2>
-          <!-- City selected -->
-          <span id="city" class="pl-2"></span>
-          <!-- Date -->
-          <span id="todaysDate"></span>  
-        </h2>
-        <h3>Temp: <span id="currentTemperature"></span> </h3>
-        <h3>Wind: <span id="currentWind"></span> </h3>
-        <h3>Humidity: <span id="currentHumidity"></span> </h3>
-        <h3>UV Index: <span id="currentUVIndex"></span> </h3>
+      <div id="currentBox"  style="display: none;">
+        <div class="border w-100 p-2 border-primary">
+
+          <h2>
+            <!-- City selected -->
+            <span id="city" class="pl-2"></span>
+            <!-- Date -->
+            <span id="todaysDate" class="pl-2"></span>
+            <!-- icon -->
+            <img id="todaysIcon">
+          </h2>
+          <h3>Temp: <span id="currentTemperature"></span> </h3>
+          <h3>Wind: <span id="currentWind"></span> </h3>
+          <h3>Humidity: <span id="currentHumidity"></span> </h3>
+          <h3>UV Index: <span id="currentUVIndex"></span> </h3>
+        </div>
         <!-- 5-day forecast -->
         <div id="fiveDayBox">
           <h2>5 Day Forcast</h2>
-          <div class="d-flex">
-            <section id="forecast"></section>
-            <section class="p-2">
+          <div class="d-flex flex-wrap">
+            
+            <section class="p-2 m-1 bg-info text-white">
               <h3 id="1"></h3>
+              <img id="icon0">
               <h4>Temp: <span class="fiveDayTemp"></span></h4>
               <h4>Wind: <span class="fiveDayWind"></span></h4>
               <h4>Humidity: <span class="fiveDayHumid"></span></h4>
             </section>
-            <section class="p-2">
+            <section class="p-2 m-1 bg-info text-white">
               <h3 id="2"></h3>
+              <img id="icon1">
               <h4>Temp: <span class="fiveDayTemp"></span></h4>
               <h4>Wind: <span class="fiveDayWind"></span></h4>
               <h4>Humidity: <span class="fiveDayHumid"></span></h4>
             </section>
-            <section class="p-2">
+            <section class="p-2 m-1 bg-info text-white">
               <h3 id="3"></h3>
+              <img id="icon2">
               <h4>Temp: <span class="fiveDayTemp"></span></h4>
               <h4>Wind: <span class="fiveDayWind"></span></h4>
               <h4>Humidity: <span class="fiveDayHumid"></span></h4>
             </section>
-            <section class="p-2">
+            <section class="p-2 m-1 bg-info text-white">
               <h3 id="4"></h3>
+              <img id="icon3">
               <h4>Temp: <span class="fiveDayTemp"></span></h4>
               <h4>Wind: <span class="fiveDayWind"></span></h4>
               <h4>Humidity: <span class="fiveDayHumid"></span></h4>
             </section>
-            <section class="p-2">
+            <section class="p-2 m-1 bg-info text-white">
               <h3 id="5"></h3>
+              <img id="icon4">
               <h4>Temp: <span class="fiveDayTemp"></span></h4>
               <h4>Wind: <span class="fiveDayWind"></span></h4>
               <h4>Humidity: <span class="fiveDayHumid"></span></h4>

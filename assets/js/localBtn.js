@@ -3,7 +3,7 @@
 var addHere = document.getElementById("newTetas");
 
 var cityChama = JSON.parse(localStorage.getItem("cities"));
-
+var prettyIcon = document.getElementById("todaysIcon");
 
 
 
@@ -50,7 +50,6 @@ function goSec(event) {
         errorMessage.style.display = "none";
         cityDisplayed = event.target.innerText;
         selectedCity.textContent = cityDisplayed.toUpperCase();
-        console.log(data);
         weatherDatasec(data);
         
         return
@@ -68,16 +67,24 @@ function weatherDatasec(data) {
     .then((weatherLoco) =>{    
 
         mainGrid.style.display = "inline";
-        todayTemp.textContent= weatherLoco.current.temp + " °C"
-        todayWind.textContent= weatherLoco.current.wind_speed + " KM/H" 
-        todayHumidity.textContent= weatherLoco.current.humidity + " %"
-        todayUVIndex.textContent= weatherLoco.current.uvi
-
+        var iconUrl = `https://openweathermap.org/img/w/${weatherLoco.current.weather[0].icon}.png`;
+        // Set attribute to attach to <img>
+        prettyIcon.setAttribute("src", iconUrl);
+        todayTemp.textContent= weatherLoco.current.temp + " °C";
+        todayWind.textContent= weatherLoco.current.wind_speed + " KM/H" ;
+        todayHumidity.textContent= weatherLoco.current.humidity + " %";
+        todayUVIndex.textContent= weatherLoco.current.uvi;
+        
         // five day forecast
         for (var i = 0; i < 5; i++) {
             tempCard[i].textContent =   weatherLoco.daily[i].temp.eve + " °C";
             windCard[i].textContent =   weatherLoco.daily[i].wind_speed +" KM/H" ;
-            humidCard[i].textContent =  weatherLoco.daily[i].humidity + " %";            
+            humidCard[i].textContent =  weatherLoco.daily[i].humidity + " %";    
+
+            var iconFiveDays = `https://openweathermap.org/img/w/${weatherLoco.daily[i].weather[0].icon}.png`;
+
+            var firstSelec = document.getElementById("icon" + String(i));
+            firstSelec.setAttribute("src", iconFiveDays);
           }
     })
 };

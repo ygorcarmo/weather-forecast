@@ -18,6 +18,7 @@ var tempCard = document.querySelectorAll(".fiveDayTemp");
 var windCard = document.querySelectorAll(".fiveDayWind");
 var humidCard = document.querySelectorAll(".fiveDayHumid");
 var currentDay = document.getElementById("todaysDate");
+var prettyIcon = document.getElementById("todaysIcon");
 // Text/Elements End
 
 // Dates
@@ -53,22 +54,7 @@ function goLoco(event) {
     })
     .catch((error) => {
         errorMessage.textContent = "City Not Found";
-        errorMessage.style.display = "inline";
-
-        // var citiesLocal = localStorage.getItem("cities");
-
-        // if(!citiesLocal || citiesLocal === null){
-        //     citiesLocal = [];
-        // }else{
-        //     citiesLocal = JSON.parse(citiesLocal)
-        //     citiesLocal.pop();
-        //     console.log(citiesLocal);
-        //     localStorage.setItem("cities", JSON.stringify(citiesLocal));
-        //     resetState();
-        //     console.log(initTwo)
-        //     initTwo();
-        // }
-        
+        errorMessage.style.display = "inline";        
       });
 
 };
@@ -81,6 +67,9 @@ function weatherData(data) {
         mainGrid.style.display = "inline";
         setLocal(); 
         cityDisplayed = cityTBS.value
+        var iconUrl = `https://openweathermap.org/img/w/${weatherLoco.current.weather[0].icon}.png`;
+        // Set attribute to attach to <img>
+        prettyIcon.setAttribute("src", iconUrl);
         selectedCity.textContent = cityDisplayed.toUpperCase();
         todayTemp.textContent= weatherLoco.current.temp + " °C"
         todayWind.textContent= weatherLoco.current.wind_speed + " KM/H" 
@@ -91,7 +80,12 @@ function weatherData(data) {
         for (var i = 0; i < 5; i++) {
             tempCard[i].textContent =   weatherLoco.daily[i].temp.eve + " °C";
             windCard[i].textContent =   weatherLoco.daily[i].wind_speed +" KM/H" ;
-            humidCard[i].textContent =  weatherLoco.daily[i].humidity + " %";            
+            humidCard[i].textContent =  weatherLoco.daily[i].humidity + " %";
+            
+            var iconFiveDays = `https://openweathermap.org/img/w/${weatherLoco.daily[i].weather[0].icon}.png`;
+
+            var firstSelec = document.getElementById("icon" + String(i));
+            firstSelec.setAttribute("src", iconFiveDays);
           }
     })
 };
