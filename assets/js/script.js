@@ -128,7 +128,7 @@ function resetState(){
 function renderTodosMain() {
     for (var i = 0; i < citiesLocal.length; i++){
         var btn = document.createElement("button");
-        var citySaved = citiesLocal[i]["city"];
+        var citySaved = citiesLocal[i];
         
         
         btn.textContent = citySaved;
