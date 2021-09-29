@@ -101,9 +101,13 @@ function setLocal(){
 
     if(!citiesLocal || citiesLocal === null){
         citiesLocal = [];
+        citiesLocal.push(cityLocal);
+        console.log(citiesLocal);
+        localStorage.setItem("cities", JSON.stringify(citiesLocal));
     }else{
         citiesLocal = JSON.parse(localStorage.getItem("cities"))
         citiesLocal.push(cityLocal);
+        console.log(citiesLocal);
         localStorage.setItem("cities", JSON.stringify(citiesLocal));
     }
 
@@ -140,6 +144,7 @@ function initTwo(){
     }else{
         resetState();
         renderTodosMain();
+        var secBtn = document.querySelectorAll(".btn-secondary");
         for (var i = 0; i < secBtn.length; i++) {
             secBtn[i].addEventListener('click', goSec);
         }
