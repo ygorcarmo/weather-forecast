@@ -65,7 +65,6 @@ function weatherData(data) {
     .then((weatherLoco) =>{    
 
         mainGrid.style.display = "inline";
-        setLocal(); 
         cityDisplayed = cityTBS.value
         var iconUrl = `https://openweathermap.org/img/w/${weatherLoco.current.weather[0].icon}.png`;
         // Set attribute to attach to <img>
@@ -75,6 +74,8 @@ function weatherData(data) {
         todayWind.textContent= weatherLoco.current.wind_speed + " KM/H" 
         todayHumidity.textContent= weatherLoco.current.humidity + " %"
         todayUVIndex.textContent= weatherLoco.current.uvi
+        
+        setLocal();
 
         // five day forecast
         for (var i = 0; i < 5; i++) {
@@ -90,7 +91,8 @@ function weatherData(data) {
     })
 };
 
-var citiesLocal = localStorage.getItem("cities");
+
+var citiesLocal = JSON.parse(localStorage.getItem("cities"));
 function setLocal(){
     var cityLocal = {
         city: cityTBS.value
@@ -99,21 +101,19 @@ function setLocal(){
 
     if(!citiesLocal || citiesLocal === null){
         citiesLocal = [];
-        citiesLocal.push(cityLocal);
-        console.log(citiesLocal);
+        citiesLocal.push(cityTBS.value);
+        console.log(cityTBS.value);
         localStorage.setItem("cities", JSON.stringify(citiesLocal));
-    }else{
-        citiesLocal = JSON.parse(localStorage.getItem("cities"))
-        citiesLocal.push(cityLocal);
-        console.log(citiesLocal);
-        localStorage.setItem("cities", JSON.stringify(citiesLocal));
+        initTwo();
+        return
     }
-
-    // window.location.reload();
-
-  
-    initTwo();
-
+    
+    if(!citiesLocal.includes(cityTBS.value)){
+        citiesLocal.push(cityTBS.value);
+        console.log(cityTBS.value);
+        localStorage.setItem("cities", JSON.stringify(citiesLocal));
+        initTwo();
+    }
     
 }
 

@@ -10,7 +10,7 @@ var prettyIcon = document.getElementById("todaysIcon");
 
 function renderTodos() {
     for (var i = 0; i < cityChama.length; i++){
-        var citySaved = cityChama[i]["city"];
+        var citySaved = cityChama[i];
         
         var btn = document.createElement("button");
         
