@@ -24,7 +24,6 @@ var currentDay = document.getElementById("todaysDate");
 var dates = moment().format("DD/MM/YYYY");
 
 for (var i = 1; i < 6; i++){
-    console.log(i);
     document.getElementById(String(i)).textContent = moment().add(i, "day").format("DD/MM/YYYY");
 }
 currentDay.textContent = dates;
@@ -48,10 +47,7 @@ function goLoco(event) {
     .then((data)=>{  
         errorMessage.textContent = "";      
         errorMessage.style.display = "none";
-        console.log(data);
-        console.log(data.list[0].dt_txt);
-        weatherData(data);
-        
+        weatherData(data);        
         return
     })
     .catch((error) => {
@@ -86,7 +82,6 @@ function weatherData(data) {
         todayWind.textContent= weatherLoco.current.wind_speed + " KM/H" 
         todayHumidity.textContent= weatherLoco.current.humidity + " %"
         todayUVIndex.textContent= weatherLoco.current.uvi
-        console.log(weatherLoco.current.dt);
 
         // five day forecast
         for (var i = 0; i < 5; i++) {
@@ -100,20 +95,20 @@ function weatherData(data) {
 var citiesLocal = localStorage.getItem("cities");
 function setLocal(){
     var cityLocal = {
-        city: cityTBS.value.trim()
+        city: cityTBS.value
     };
 
 
     if(!citiesLocal || citiesLocal === null){
         citiesLocal = [];
     }else{
-        citiesLocal = JSON.parse(citiesLocal)
+        citiesLocal = JSON.parse(localStorage.getItem("cities"))
+        citiesLocal.push(cityLocal);
+        localStorage.setItem("cities", JSON.stringify(citiesLocal));
     }
 
-    citiesLocal.push(cityLocal);
     // window.location.reload();
 
-    localStorage.setItem("cities", JSON.stringify(citiesLocal));
   
     initTwo();
 

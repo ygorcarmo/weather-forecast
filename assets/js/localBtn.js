@@ -43,8 +43,6 @@ var apiKey = "e9338296fd417a53918f0986d22214b3";
 // goLoco();
 function goSec(event) {
     // event.preventDefault();
-    console.log(secBtn.textContent);
-    console.log(event.target.innerText)
     fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${event.target.innerText}&appid=${apiKey}&units=metric`)
     .then(response => response.json())
     .then((data)=>{  
