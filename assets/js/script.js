@@ -13,29 +13,30 @@ var todayHumidity = document.getElementById("currentHumidity");
 var todayUVIndex = document.getElementById("currentUVIndex");
 var errorMessage = document.querySelector("#errorMessage");
 var mainGrid = document.getElementById("currentBox");
-
 var cityTBS = document.getElementById("inserthere");
-
 var tempCard = document.querySelectorAll(".fiveDayTemp");
 var windCard = document.querySelectorAll(".fiveDayWind");
 var humidCard = document.querySelectorAll(".fiveDayHumid");
+var currentDay = document.getElementById("todaysDate");
 // Text/Elements End
 
-// submit button
+// Dates
+var dates = moment().format("DD/MM/YYYY");
+
+for (var i = 1; i < 6; i++){
+    console.log(i);
+    document.getElementById(String(i)).textContent = moment().add(i, "day").format("DD/MM/YYYY");
+}
+currentDay.textContent = dates;
 
 function startLoco(){
     if(cityTBS.value === ""){
         alert("Please Select a City");
+        return
     }else{
         goLoco();
-    }
-    // && !cityTBS.value === ""
-    setTimeout(() => {
-        
-        if(errorMessage.textContent === "" ){
-            setLocal();
-        }
-    }, 1000);
+        setLocal();
+    }      
 }
 // API stuff
 
@@ -48,6 +49,7 @@ function goLoco(event) {
         errorMessage.textContent = "";      
         errorMessage.style.display = "none";
         console.log(data);
+        console.log(data.list[0].dt_txt);
         weatherData(data);
         
         return
@@ -55,6 +57,19 @@ function goLoco(event) {
     .catch((error) => {
         errorMessage.textContent = "City Not Found";
         errorMessage.style.display = "inline";
+
+        var citiesLocal = localStorage.getItem("cities");
+
+        if(!citiesLocal || citiesLocal === null){
+            citiesLocal = [];
+        }else{
+            citiesLocal = JSON.parse(citiesLocal)
+            citiesLocal.pop();
+            console.log(citiesLocal);
+            localStorage.setItem("cities", JSON.stringify(citiesLocal));
+            initTwo();
+        }
+        
       });
 
 };
@@ -71,6 +86,7 @@ function weatherData(data) {
         todayWind.textContent= weatherLoco.current.wind_speed + " KM/H" 
         todayHumidity.textContent= weatherLoco.current.humidity + " %"
         todayUVIndex.textContent= weatherLoco.current.uvi
+        console.log(weatherLoco.current.dt);
 
         // five day forecast
         for (var i = 0; i < 5; i++) {
@@ -81,12 +97,12 @@ function weatherData(data) {
     })
 };
 
+var citiesLocal = localStorage.getItem("cities");
 function setLocal(){
     var cityLocal = {
         city: cityTBS.value.trim()
     };
 
-    var citiesLocal = localStorage.getItem("cities");
 
     if(!citiesLocal || citiesLocal === null){
         citiesLocal = [];
@@ -98,6 +114,39 @@ function setLocal(){
     // window.location.reload();
 
     localStorage.setItem("cities", JSON.stringify(citiesLocal));
+  
+    initTwo();
+
+    
 }
 
+function resetState(){
+    while (addHere.firstChild){
+        addHere.removeChild
+        (addHere.firstChild)
+    }
+}
 
+function renderTodosMain() {
+    for (var i = 0; i < citiesLocal.length; i++){
+        var btn = document.createElement("button");
+        var citySaved = citiesLocal[i]["city"];
+        
+        
+        btn.textContent = citySaved;
+        btn.classList.add('btn', 'btn-secondary', 'btn-lg', 'btn-block', 'mb-2')
+        
+        addHere.appendChild(btn);
+    }
+}
+function initTwo(){
+    if(!citiesLocal || citiesLocal === null){
+        citiesLocal = [];
+    }else{
+        resetState();
+        renderTodosMain();
+        for (var i = 0; i < secBtn.length; i++) {
+            secBtn[i].addEventListener('click', goSec);
+        }
+    }
+}

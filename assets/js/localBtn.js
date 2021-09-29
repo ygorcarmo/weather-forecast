@@ -51,8 +51,9 @@ function goSec(event) {
         errorMessage.textContent = "";      
         errorMessage.style.display = "none";
         cityDisplayed = event.target.innerText;
+        selectedCity.textContent = cityDisplayed.toUpperCase();
         console.log(data);
-        weatherData(data);
+        weatherDatasec(data);
         
         return
     })
@@ -63,13 +64,12 @@ function goSec(event) {
 
 };
 
-function weatherData(data) {
+function weatherDatasec(data) {
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${data.city.coord.lat}&lon=${data.city.coord.lon}&appid=${apiKey}&units=metric`)
     .then(response => response.json())
     .then((weatherLoco) =>{    
 
         mainGrid.style.display = "inline";
-        selectedCity.textContent = cityDisplayed.toUpperCase();
         todayTemp.textContent= weatherLoco.current.temp + " °C"
         todayWind.textContent= weatherLoco.current.wind_speed + " KM/H" 
         todayHumidity.textContent= weatherLoco.current.humidity + " %"
