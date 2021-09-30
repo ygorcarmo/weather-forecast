@@ -96,7 +96,7 @@ function weatherDatasec(data) {
 function setUV(uvIndex){
     if (0 <= uvIndex && uvIndex < 2) {
         todayUVIndex.classList.add("bg-success", "txt-white");
-    } else if (2 <= uvIndex && uvIndex < 8) {
+    } else if (2 <= uvIndex && uvIndex < 6) {
         todayUVIndex.classList.add("bg-warning", "txt-dark");
     } else {
         todayUVIndex.classList.add("bg-danger", "txt-white");
