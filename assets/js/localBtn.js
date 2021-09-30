@@ -73,7 +73,11 @@ function weatherDatasec(data) {
         todayTemp.textContent= weatherLoco.current.temp + " °C";
         todayWind.textContent= weatherLoco.current.wind_speed + " KM/H" ;
         todayHumidity.textContent= weatherLoco.current.humidity + " %";
-        todayUVIndex.textContent= weatherLoco.current.uvi;
+        // todayUVIndex.textContent= weatherLoco.current.uvi;
+
+        var uvIndex = weatherLoco.current.uvi
+        setUV(uvIndex);
+        todayUVIndex.textContent = uvIndex;
         
         // five day forecast
         for (var i = 0; i < 5; i++) {
@@ -88,3 +92,13 @@ function weatherDatasec(data) {
           }
     })
 };
+
+function setUV(uvIndex){
+    if (0 <= uvIndex && uvIndex < 2) {
+        todayUVIndex.classList.add("bg-success", "txt-white");
+    } else if (2 <= uvIndex && uvIndex < 8) {
+        todayUVIndex.classList.add("bg-warning", "txt-dark");
+    } else {
+        todayUVIndex.classList.add("bg-danger", "txt-white");
+    };
+}
